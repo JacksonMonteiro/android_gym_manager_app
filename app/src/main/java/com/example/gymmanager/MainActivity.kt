@@ -4,10 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -25,7 +30,7 @@ class MainActivity : ComponentActivity() {
             GymManagerTheme() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color.Black
                 ) {
                     Screen()
                 }
@@ -37,14 +42,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Screen() {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().background(Color.Black)
     ) {
 
         Image(
             painter = painterResource(id = R.drawable.background),
             contentDescription = "Background",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .alpha(0.8f)
         )
 
         Column(
@@ -54,7 +61,14 @@ fun Screen() {
             verticalArrangement = Arrangement.Center
         ) {
             WelcomeMessage()
-            LoginButton()
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+            Button("Sou Instrutor", Color(0xFFD66A40), Color.White)
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+            Button("Sou Aluno", Color(0xFFFFFFFF), Color.Black)
         }
     }
 }
@@ -82,7 +96,7 @@ fun WelcomeMessage() {
 }
 
 @Composable
-fun LoginButton() {
+fun Button(text: String, containerColor: Color, contentColor: Color) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
@@ -91,11 +105,12 @@ fun LoginButton() {
             onClick = { },
             modifier = Modifier.weight(1f),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFD66A40),
+                containerColor = containerColor,
+                contentColor = contentColor
             )
         )
         {
-            Text("Entrar");
+            Text(text)
         }
     }
 }
