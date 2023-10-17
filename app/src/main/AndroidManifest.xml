@@ -12,6 +12,11 @@
         android:theme="@style/Theme.GymManager"
         tools:targetApi="31">
         <activity
+            android:name=".InstructorLoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_instructor_login"
+            android:theme="@style/Theme.GymManager" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
