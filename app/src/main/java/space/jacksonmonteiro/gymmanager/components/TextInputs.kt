@@ -27,14 +27,17 @@ fun TextInput(
     label: String,
     modifier: Modifier?,
     keyboard: KeyboardOptions?,
-    isPasswordField: Boolean
+    onValueChange: (String) -> Unit
 ) {
     var value: String by remember { mutableStateOf("") }
     var passwordVisibility: Boolean by remember { mutableStateOf(false) }
 
     TextField(
         value = value,
-        onValueChange = { value = it },
+        onValueChange = {
+            value = it
+            onValueChange(it)
+        },
         label = { Text(text = label) },
         modifier = modifier
             ?: Modifier
@@ -54,7 +57,8 @@ fun TextInput(
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
         ),
-    )
+
+        )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,13 +67,17 @@ fun PasswordInput(
     label: String,
     modifier: Modifier?,
     keyboard: KeyboardOptions?,
+    onValueChange: (String) -> Unit
 ) {
     var value: String by remember { mutableStateOf("") }
     var passwordVisibility: Boolean by remember { mutableStateOf(false) }
 
     TextField(
         value = value,
-        onValueChange = { value = it },
+        onValueChange = {
+            value = it
+            onValueChange(it)
+        },
         label = { Text(text = label) },
         modifier = modifier
             ?: Modifier
@@ -91,9 +99,9 @@ fun PasswordInput(
         ),
         trailingIcon = {
             IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
-                val image = if (passwordVisibility) Icons.Filled.VisibilityOff else Icons.Filled.Visibility
+                val image =
+                    if (passwordVisibility) Icons.Filled.VisibilityOff else Icons.Filled.Visibility
                 val description = if (passwordVisibility) "Esconder Senha" else "Mostrar senha"
-
                 Icon(imageVector = image, contentDescription = description)
             }
         },
@@ -104,10 +112,5 @@ fun PasswordInput(
 @Preview
 @Composable
 fun TextInputPreview() {
-    TextInput(
-        label = "E-mail",
-        modifier = null,
-        keyboard = null,
-        isPasswordField = true
-    )
+
 }

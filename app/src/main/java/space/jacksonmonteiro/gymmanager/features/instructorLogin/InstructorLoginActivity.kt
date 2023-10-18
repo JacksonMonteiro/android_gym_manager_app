@@ -64,13 +64,14 @@ class InstructorLoginActivity : ComponentActivity() {
                                     label = "E-mail",
                                     modifier = null,
                                     keyboard = null,
-                                    isPasswordField = false
+                                    onValueChange = {}
                                 )
                                 Spacer(modifier = Modifier.height(16.dp))
                                 PasswordInput(
                                     label = "Senha",
                                     modifier = null,
                                     keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
+                                    onValueChange = {}
                                 )
                                 Spacer(modifier = Modifier.height(16.dp))
                                 Button(
