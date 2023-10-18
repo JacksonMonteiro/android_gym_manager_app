@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 
 /*
 Created By Jackson Monteiro on 17/10/2023
-Copyright (c) 2023 GFX Consultoria
 */
 
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "539588190468",
+    "project_id": "gym-management-app-e2091",
+    "storage_bucket": "gym-management-app-e2091.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539588190468:android:3c273dc2657bf93ed93051",
+        "android_client_info": {
+          "package_name": "space.jacksonmonteiro.gymmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE51DGgBbxxK3KjwGCLsFlUU9tINB16qA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
