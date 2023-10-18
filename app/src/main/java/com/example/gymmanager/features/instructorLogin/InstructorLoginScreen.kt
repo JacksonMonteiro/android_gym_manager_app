@@ -3,6 +3,7 @@ package com.example.gymmanager.features.instructorLogin
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -14,6 +15,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
@@ -23,10 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.GymManagerTheme
-import com.example.gymmanager.components.Button
-import com.example.gymmanager.components.Message
-import com.example.gymmanager.components.ReturnButton
-import com.example.gymmanager.components.TextInput
+import com.example.gymmanager.components.*
 import com.example.gymmanager.utils.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,11 +70,10 @@ fun InstructorLoginActivity(navController: NavController) {
                             isPasswordField = false
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        TextInput(
+                        PasswordInput(
                             label = "Senha",
                             modifier = null,
-                            keyboard = null,
-                            isPasswordField = true
+                            keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(

@@ -3,6 +3,7 @@ package com.example.gymmanager.features.instructorRegistering
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,10 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.GymManagerTheme
-import com.example.gymmanager.components.Button
-import com.example.gymmanager.components.Message
-import com.example.gymmanager.components.ReturnButton
-import com.example.gymmanager.components.TextInput
+import com.example.gymmanager.components.*
 
 
 /*
@@ -70,28 +69,26 @@ fun InstructorRegisteringScreen(navController: NavController) {
                             label = "Nome",
                             modifier = null,
                             keyboard = null,
-                            visualTransformation = null
+                            isPasswordField = false
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         TextInput(
                             label = "E-mail",
                             modifier = null,
                             keyboard = null,
-                            visualTransformation = null
+                            isPasswordField = false,
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        TextInput(
+                        PasswordInput(
                             label = "Senha",
                             modifier = null,
-                            keyboard = null,
-                            visualTransformation = PasswordVisualTransformation()
+                            keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        TextInput(
-                            label = "Confirme a sua senha",
+                        PasswordInput(
+                            label = "Confirme sua senha",
                             modifier = null,
-                            keyboard = null,
-                            visualTransformation = PasswordVisualTransformation()
+                            keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(
