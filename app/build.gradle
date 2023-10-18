@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.gymmanager'
+    namespace 'space.jacksonmonteiro.gymmanager'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.gymmanager"
+        applicationId "space.jacksonmonteiro.gymmanager"
         minSdk 24
         targetSdk 34
         versionCode 1

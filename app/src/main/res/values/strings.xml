@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GymManager</string>
     <string name="title_activity_instructor_login">InstructorLoginActivity</string>
+    <string name="title_activity_instructor_registering">InstructorRegisteringActivity</string>
 </resources>

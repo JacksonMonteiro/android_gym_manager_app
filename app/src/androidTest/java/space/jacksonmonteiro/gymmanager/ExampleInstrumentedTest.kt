@@ -1,4 +1,4 @@
-package com.example.gymmanager
+package space.jacksonmonteiro.gymmanager
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,5 @@
-package com.example.gymmanager.features.home
+/*
+package space.jacksonmonteiro.gymmanager.features.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -20,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.GymManagerTheme
-import com.example.gymmanager.R
-import com.example.gymmanager.components.Button
-import com.example.gymmanager.components.Message
-import com.example.gymmanager.utils.Routes
+import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
+import space.jacksonmonteiro.gymmanager.R
+import space.jacksonmonteiro.gymmanager.components.Button
+import space.jacksonmonteiro.gymmanager.components.Message
+import space.jacksonmonteiro.gymmanager.utils.Routes
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -95,4 +96,4 @@ fun ScreenPreview() {
     GymManagerTheme {
         HomeActivity(rememberNavController())
     }
-}
+}*/
