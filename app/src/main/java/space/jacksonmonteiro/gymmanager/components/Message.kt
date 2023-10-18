@@ -1,4 +1,4 @@
-package com.example.gymmanager.components
+package space.jacksonmonteiro.gymmanager.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text

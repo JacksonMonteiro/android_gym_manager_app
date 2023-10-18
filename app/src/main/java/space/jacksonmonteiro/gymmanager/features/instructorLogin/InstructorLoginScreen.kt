@@ -1,39 +1,35 @@
-package com.example.gymmanager.features.instructorRegistering
+package space.jacksonmonteiro.gymmanager.features.instructorLogin
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.GymManagerTheme
-import com.example.gymmanager.components.*
-
-
-/*
-Created By Jackson Monteiro on 17/10/2023
-Copyright (c) 2023 GFX Consultoria
-*/
-
+import space.jacksonmonteiro.gymmanager.utils.Routes
+import space.jacksonmonteiro.gymmanager.components.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun InstructorRegisteringScreen(navController: NavController) {
+fun InstructorLoginActivity(navController: NavController) {
     GymManagerTheme {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
@@ -66,17 +62,10 @@ fun InstructorRegisteringScreen(navController: NavController) {
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         TextInput(
-                            label = "Nome",
-                            modifier = null,
-                            keyboard = null,
-                            isPasswordField = false
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        TextInput(
                             label = "E-mail",
                             modifier = null,
                             keyboard = null,
-                            isPasswordField = false,
+                            isPasswordField = false
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         PasswordInput(
@@ -85,14 +74,8 @@ fun InstructorRegisteringScreen(navController: NavController) {
                             keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        PasswordInput(
-                            label = "Confirme sua senha",
-                            modifier = null,
-                            keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
                         Button(
-                            text = "Criar conta",
+                            text = "Login",
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = Color.Black,
                             action = {
@@ -100,7 +83,27 @@ fun InstructorRegisteringScreen(navController: NavController) {
                             }
                         )
                     }
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                navController.navigate(Routes.instructorRegistering) {
+                                    popUpTo(Routes.instructorLogin)
+                                }
+                            }, horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(text = buildAnnotatedString {
+                            append("Não tem uma conta? ")
+                            withStyle(
+                                SpanStyle(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            ) {
+                                append("Clique aqui e cadastre-se")
+                            }
+                        })
+                    }
                 }
             }
         }
@@ -111,6 +114,6 @@ fun InstructorRegisteringScreen(navController: NavController) {
 @Composable
 fun ScreenPreview() {
     GymManagerTheme {
-        InstructorRegisteringScreen(navController = rememberNavController())
+        InstructorLoginActivity(navController = rememberNavController())
     }
 }

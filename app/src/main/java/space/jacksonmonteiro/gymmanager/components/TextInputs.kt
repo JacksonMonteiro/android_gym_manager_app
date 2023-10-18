@@ -1,4 +1,4 @@
-package com.example.gymmanager.components
+package space.jacksonmonteiro.gymmanager.components
 /*
 Created By Jackson Monteiro on 17/10/2023
 */
@@ -15,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview

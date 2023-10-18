@@ -1,4 +1,4 @@
-package com.example.gymmanager
+package space.jacksonmonteiro.gymmanager
 
 import org.junit.Test
 

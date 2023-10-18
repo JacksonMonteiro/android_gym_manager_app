@@ -1,4 +1,4 @@
-package com.example.gymmanager.utils
+package space.jacksonmonteiro.gymmanager.utils
 
 
 /*
