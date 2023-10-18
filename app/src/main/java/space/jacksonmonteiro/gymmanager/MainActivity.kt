@@ -1,35 +1,100 @@
 package space.jacksonmonteiro.gymmanager
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import space.jacksonmonteiro.gymmanager.features.home.HomeActivity
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
+import space.jacksonmonteiro.gymmanager.components.Button
+import space.jacksonmonteiro.gymmanager.components.Message
 import space.jacksonmonteiro.gymmanager.features.instructorLogin.InstructorLoginActivity
-import space.jacksonmonteiro.gymmanager.features.instructorRegistering.InstructorRegisteringScreen
-import space.jacksonmonteiro.gymmanager.utils.Routes
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
-            val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = Routes.home) {
-                composable(route = Routes.home) {
-                    HomeActivity(navController)
-                }
+            GymManagerTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color.Black
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.Black)
+                    ) {
 
-                composable(route = Routes.instructorLogin) {
-                    InstructorLoginActivity(navController)
-                }
+                        Image(
+                            painter = painterResource(id = R.drawable.background),
+                            contentDescription = "Background",
+                            contentScale = ContentScale.FillBounds,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .alpha(0.75f)
+                        )
 
-                composable(route = Routes.instructorRegistering) {
-                    InstructorRegisteringScreen(navController)
+                        Column(
+                            modifier = Modifier
+                                .padding(all = 12.dp)
+                                .fillMaxSize(),
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Message(
+                                "Seja Bem-Vindo!",
+                                fontSize = 32.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            Spacer(
+                                modifier = Modifier.height(12.dp)
+                            )
+                            Button(
+                                text = "Sou Instrutor",
+                                containerColor = MaterialTheme.colorScheme.primary,
+                                contentColor = Color.Black,
+                                action = {
+                                    val navigation = Intent(
+                                        this@MainActivity,
+                                        InstructorLoginActivity::class.java
+                                    )
+                                    startActivity(navigation)
+                                }
+                            )
+                            Spacer(
+                                modifier = Modifier.height(12.dp)
+                            )
+                            Button("Sou Aluno", Color(0xFFFFFFFF), Color.Black, {})
+                        }
+                    }
                 }
             }
         }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun MainActivityPreview() {
+    GymManagerTheme {
+        MainActivity()
     }
 }

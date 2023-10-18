@@ -1,6 +1,5 @@
-package com.example.compose
+package space.jacksonmonteiro.gymmanager.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -27,15 +26,11 @@ private val themeColors = lightColorScheme(
 )
 
 
-
 @Composable
-fun GymManagerTheme(
-  useDarkTheme: Boolean = isSystemInDarkTheme(),
-  content: @Composable() () -> Unit
-) {
-  val colors = themeColors
-  MaterialTheme(
-    colorScheme = colors,
-    content = content
-  )
+fun GymManagerTheme(content: @Composable() () -> Unit) {
+    val colors = themeColors
+    MaterialTheme(
+        colorScheme = colors,
+        content = content
+    )
 }
