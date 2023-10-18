@@ -47,7 +47,7 @@ class InstructorLoginActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 ReturnButton(action = {
-
+                                    finish()
                                 })
                             }
                             Column() {

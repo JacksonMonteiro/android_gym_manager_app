@@ -42,7 +42,7 @@ class InstructorRegisteringActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 ReturnButton(action = {
-
+                                    finish()
                                 })
                             }
                             Column() {
