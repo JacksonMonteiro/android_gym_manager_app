@@ -38,5 +38,5 @@ fun Button(text: String, containerColor: Color, contentColor: Color, action: () 
 @Preview
 @Composable
 fun PreviewButton() {
-    Button(text = "Login", containerColor = MaterialTheme.colorScheme.primary, contentColor = Color.White, {})
+    Button(text = "Login", containerColor = MaterialTheme.colorScheme.primary, contentColor = Color.White) {}
 }

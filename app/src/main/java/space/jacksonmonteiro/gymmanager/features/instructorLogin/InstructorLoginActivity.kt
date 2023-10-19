@@ -1,6 +1,5 @@
 package space.jacksonmonteiro.gymmanager.features.instructorLogin
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,7 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,7 +51,7 @@ class InstructorLoginActivity : ComponentActivity() {
                                     finish()
                                 })
                             }
-                            Column() {
+                            Column {
                                 Message(
                                     message = "Insira os dados da sua conta para fazer login",
                                     fontSize = 22.sp,
@@ -86,7 +87,10 @@ class InstructorLoginActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clickable {
-                                        val navigation = Intent(this@InstructorLoginActivity, InstructorRegisteringActivity::class.java)
+                                        val navigation = Intent(
+                                            this@InstructorLoginActivity,
+                                            InstructorRegisteringActivity::class.java
+                                        )
                                         startActivity(navigation)
 
                                     }, horizontalArrangement = Arrangement.Center

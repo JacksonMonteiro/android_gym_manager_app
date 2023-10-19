@@ -30,7 +30,6 @@ fun TextInput(
     onValueChange: (String) -> Unit
 ) {
     var value: String by remember { mutableStateOf("") }
-    var passwordVisibility: Boolean by remember { mutableStateOf(false) }
 
     TextField(
         value = value,

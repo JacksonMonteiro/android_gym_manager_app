@@ -25,5 +25,5 @@ fun Message(message: String, fontSize: TextUnit?, color: Color?, fontWeight: Fon
         fontWeight = fontWeight ?: FontWeight.Normal,
         textAlign = textAlign ?: TextAlign.Center,
         modifier = modifier ?: Modifier.fillMaxWidth()
-    );
+    )
 }

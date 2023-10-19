@@ -22,12 +22,11 @@ import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
 
 class InstructorRegisteringActivity : ComponentActivity(), InstructorRegisteringContract.View {
     private val presenter = InstructorRegisteringPresenter()
-    private val TAG = "InstructorRegAct"
 
-    var name: String = ""
-    var email: String = ""
-    var password: String = ""
-    var passwordConfirmation: String = ""
+    private var name: String = ""
+    private var email: String = ""
+    private var password: String = ""
+    private var confirmedPassword: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +55,7 @@ class InstructorRegisteringActivity : ComponentActivity(), InstructorRegistering
                                     finish()
                                 })
                             }
-                            Column() {
+                            Column {
                                 Message(
                                     message = "Insira os dados da sua conta para fazer login",
                                     fontSize = 22.sp,
@@ -98,7 +97,7 @@ class InstructorRegisteringActivity : ComponentActivity(), InstructorRegistering
                                     modifier = null,
                                     keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
                                     onValueChange = { value ->
-                                        passwordConfirmation = value
+                                        confirmedPassword = value
                                     }
                                 )
                                 Spacer(modifier = Modifier.height(16.dp))
@@ -107,7 +106,7 @@ class InstructorRegisteringActivity : ComponentActivity(), InstructorRegistering
                                     containerColor = MaterialTheme.colorScheme.primary,
                                     contentColor = Color.Black,
                                     action = {
-                                        presenter.register(email, password, name)
+                                        presenter.register(name, email, password, confirmedPassword)
                                     }
                                 )
                             }
@@ -119,9 +118,20 @@ class InstructorRegisteringActivity : ComponentActivity(), InstructorRegistering
         }
     }
 
+
     override fun showFailure(message: String) {
         AlertDialog.Builder(this)
             .setTitle("Erro")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    override fun showSuccess(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Sucesso!")
             .setMessage(message)
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
@@ -134,7 +144,7 @@ class InstructorRegisteringActivity : ComponentActivity(), InstructorRegistering
 @Preview
 @Composable
 fun ScreenPreview() {
-    GymManagerTheme() {
+    GymManagerTheme {
         InstructorRegisteringActivity()
     }
 }

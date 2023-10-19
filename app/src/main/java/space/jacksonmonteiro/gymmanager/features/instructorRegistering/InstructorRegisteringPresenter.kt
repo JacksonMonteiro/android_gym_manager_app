@@ -1,6 +1,6 @@
 package space.jacksonmonteiro.gymmanager.features.instructorRegistering
 
-import android.util.Log
+import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 
@@ -14,21 +14,21 @@ class InstructorRegisteringPresenter : InstructorRegisteringContract.Presenter {
     lateinit var view: InstructorRegisteringContract.View
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val TAG = "InstructorRegistering"
 
-    override fun register(email: String, password: String, name: String) {
-        if (validate(email, password, name)) {
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+    override fun register(
+        name: String,
+        email: String,
+        password: String,
+        confirmedPassword: String
+    ) {
+        if (validate(name, email, password, confirmedPassword)) {
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Show Success pop-up
-                    Log.d(TAG, "Instructor Created With Success")
+                    registerName(name)
                 } else {
-                    // Show Error pop-up
-                    Log.e(TAG, "Instructor Registering Failed")
+                    view.showFailure("Ocorreu um erro ao tentar criar o seu usuário, por favor, tente novamente. Se o erro persistir, entre em contato com o desenvolvedor")
                 }
             }
-        } else {
-            view.showFailure("Alguns campos não foram preenchidos corretamente")
         }
     }
 
@@ -41,15 +41,63 @@ class InstructorRegisteringPresenter : InstructorRegisteringContract.Presenter {
 
         user!!.updateProfile(profileUpdates).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                // Show Success Message
+                view.showSuccess("O seu usuário foi criado com sucesso!")
             }
         }
     }
 
-    override fun validate(email: String, password: String, name: String): Boolean {
-        if (email.isEmpty()) {
+    override fun validate(
+        name: String,
+        email: String,
+        password: String,
+        confirmedPassword: String
+    ): Boolean {
+        if (name.isEmpty()) {
+            view.showFailure("O campo de nome está vazio por favor, preencha-o e tente novamente")
             return false
+        } else if (email.isEmpty()) {
+            view.showFailure("O campo de e-mail está vazio, por favor, preencha-o e tente novamente")
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            view.showFailure("O e-mail inserido não é válido, por favor, insira um e-mail válido e tente novamente")
+            return false
+        } else if (password.isEmpty()) {
+            view.showFailure("O campo de senha está vazio, por favor, preencha-o e tente novamente")
+            return false
+        } else if (password.length < 6) {
+            view.showFailure("O campo de senha deve ter no mínimo 6 dígitos, e deve ter conter letras minúsculas, maiúsculas e números")
+            return false
+        } else if (password != confirmedPassword) {
+            view.showFailure("As senhas não são iguais, por favor, verifique isso e tente novamente")
+            return false
+        } else {
+            var hasLowerCaseLetter = false
+            var hasUpperCaseLetter = false
+            var hasNumber = false
+
+            for (char in password.iterator()) {
+                if (char.isLowerCase()) {
+                    hasLowerCaseLetter = true
+                } else if (char.isUpperCase()) {
+                    hasUpperCaseLetter = true
+                } else if (char.isDigit()) {
+                    hasNumber = true
+                }
+            }
+
+            if (!hasLowerCaseLetter) {
+                view.showFailure("A sua senha deve ter pelo menos uma letra minúscula. Corrija isso e tente novamente")
+                return false
+            } else if (!hasUpperCaseLetter) {
+                view.showFailure("A sua senha deve ter pelo menos uma letra maiúscula. Corrija isso e tente novamente")
+                return false
+            } else if (!hasNumber) {
+                view.showFailure("A sua senha deve ter pelo menos um número. Corrija isso e tente novamente")
+                return false
+            }
         }
+
+
         return true
     }
 }
