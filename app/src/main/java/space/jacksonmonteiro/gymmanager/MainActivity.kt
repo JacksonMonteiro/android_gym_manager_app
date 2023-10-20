@@ -20,10 +20,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
+import com.google.firebase.auth.FirebaseAuth
 import space.jacksonmonteiro.gymmanager.components.Button
 import space.jacksonmonteiro.gymmanager.components.Message
+import space.jacksonmonteiro.gymmanager.features.home.HomeActivity
 import space.jacksonmonteiro.gymmanager.features.instructorLogin.InstructorLoginActivity
+import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,6 +90,19 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // Veifiy user session, if already logged in, redirect to home screen
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val navigation = Intent(this@MainActivity, HomeActivity::class.java)
+            navigation.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(navigation)
         }
     }
 }
