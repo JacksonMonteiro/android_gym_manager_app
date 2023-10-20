@@ -1,4 +1,4 @@
-package space.jacksonmonteiro.gymmanager.features.home
+package space.jacksonmonteiro.gymmanager.features.instructorsHome
 
 
 /*
@@ -6,7 +6,7 @@ Created By Jackson Monteiro on 20/10/2023
 */
 
 
-interface HomeContract {
+interface InstructorsHomeContract {
     interface Presenter {
         fun logout()
     }

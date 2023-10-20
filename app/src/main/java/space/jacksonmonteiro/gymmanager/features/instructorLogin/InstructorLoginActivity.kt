@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import space.jacksonmonteiro.gymmanager.components.*
-import space.jacksonmonteiro.gymmanager.features.home.HomeActivity
+import space.jacksonmonteiro.gymmanager.features.instructorsHome.InstructorsHomeActivity
 import space.jacksonmonteiro.gymmanager.features.instructorRegistering.InstructorRegisteringActivity
 import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
 
@@ -139,7 +139,7 @@ class InstructorLoginActivity : ComponentActivity(), InstructorLoginContract.Vie
     }
 
     override fun navigateToHome() {
-        val navigation = Intent(this@InstructorLoginActivity, HomeActivity::class.java)
+        val navigation = Intent(this@InstructorLoginActivity, InstructorsHomeActivity::class.java)
         startActivity(navigation)
     }
 }

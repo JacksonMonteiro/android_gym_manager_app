@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.sp
 import com.google.firebase.auth.FirebaseAuth
 import space.jacksonmonteiro.gymmanager.components.Button
 import space.jacksonmonteiro.gymmanager.components.Message
-import space.jacksonmonteiro.gymmanager.features.home.HomeActivity
 import space.jacksonmonteiro.gymmanager.features.instructorLogin.InstructorLoginActivity
+import space.jacksonmonteiro.gymmanager.features.instructorsHome.InstructorsHomeActivity
 import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
 
 
@@ -100,7 +100,7 @@ class MainActivity : ComponentActivity() {
         val auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val navigation = Intent(this@MainActivity, HomeActivity::class.java)
+            val navigation = Intent(this@MainActivity, InstructorsHomeActivity::class.java)
             navigation.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(navigation)
         }

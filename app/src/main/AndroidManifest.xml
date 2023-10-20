@@ -12,7 +12,7 @@
         android:theme="@style/Theme.GymManager"
         tools:targetApi="31">
         <activity
-            android:name=".features.home.HomeActivity"
+            android:name=".features.instructorsHome.InstructorsHomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.GymManager" />
