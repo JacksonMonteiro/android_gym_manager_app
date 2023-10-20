@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,12 +24,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import space.jacksonmonteiro.gymmanager.components.*
+import space.jacksonmonteiro.gymmanager.features.home.HomeActivity
 import space.jacksonmonteiro.gymmanager.features.instructorRegistering.InstructorRegisteringActivity
 import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
 
-class InstructorLoginActivity : ComponentActivity() {
+class InstructorLoginActivity : ComponentActivity(), InstructorLoginContract.View {
+    private val presenter = InstructorLoginPresenter()
+
+    private var email = ""
+    private var password = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        presenter.view = this
+
         setContent {
             GymManagerTheme {
                 Surface(
@@ -65,14 +75,18 @@ class InstructorLoginActivity : ComponentActivity() {
                                     label = "E-mail",
                                     modifier = null,
                                     keyboard = null,
-                                    onValueChange = {}
+                                    onValueChange = { value ->
+                                        email = value
+                                    }
                                 )
                                 Spacer(modifier = Modifier.height(16.dp))
                                 PasswordInput(
                                     label = "Senha",
                                     modifier = null,
                                     keyboard = KeyboardOptions(keyboardType = KeyboardType.Password),
-                                    onValueChange = {}
+                                    onValueChange = { value ->
+                                        password = value
+                                    }
                                 )
                                 Spacer(modifier = Modifier.height(16.dp))
                                 Button(
@@ -80,7 +94,7 @@ class InstructorLoginActivity : ComponentActivity() {
                                     containerColor = MaterialTheme.colorScheme.primary,
                                     contentColor = Color.Black,
                                     action = {
-
+                                        presenter.login(email, password)
                                     })
                             }
                             Row(
@@ -112,6 +126,21 @@ class InstructorLoginActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun showFailure(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Erro")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    override fun navigateToHome() {
+        val navigation = Intent(this@InstructorLoginActivity, HomeActivity::class.java)
+        startActivity(navigation)
     }
 }
 
