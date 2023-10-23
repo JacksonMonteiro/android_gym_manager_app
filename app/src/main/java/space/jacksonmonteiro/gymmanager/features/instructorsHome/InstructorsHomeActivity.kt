@@ -8,21 +8,23 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import space.jacksonmonteiro.gymmanager.MainActivity
 import space.jacksonmonteiro.gymmanager.components.BottomNavigationItem
-import space.jacksonmonteiro.gymmanager.components.Button
+import space.jacksonmonteiro.gymmanager.components.Menu
+import space.jacksonmonteiro.gymmanager.features.settings.SettingsScreen
 import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
+import space.jacksonmonteiro.gymmanager.utils.Routes
 
 class InstructorsHomeActivity : ComponentActivity(), InstructorsHomeContract.View {
     private val presenter = InstructorsHomePresenter()
@@ -36,17 +38,26 @@ class InstructorsHomeActivity : ComponentActivity(), InstructorsHomeContract.Vie
 
         setContent {
             GymManagerTheme {
+                val navController = rememberNavController()
+
                 val items = listOf<BottomNavigationItem>(
                     BottomNavigationItem(
                         title = "Alunos",
                         selectedIcon = Icons.Filled.Person,
                         unselectedIcon = Icons.Outlined.Person,
-                    )
+                        action = {
+                            navController.navigate(Routes.home)
+                        }
+                    ),
+                    BottomNavigationItem(
+                        title = "Configurações",
+                        selectedIcon = Icons.Filled.Settings,
+                        unselectedIcon = Icons.Outlined.Settings,
+                        action = {
+                            navController.navigate(Routes.settings)
+                        }
+                    ),
                 )
-
-                var selectedItem by rememberSaveable() {
-                    mutableStateOf(0)
-                }
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -54,41 +65,22 @@ class InstructorsHomeActivity : ComponentActivity(), InstructorsHomeContract.Vie
                 ) {
                     Scaffold(
                         bottomBar = {
-                            NavigationBar() {
-                                items.forEachIndexed { index, item ->
-                                    NavigationBarItem(
-                                        selected = selectedItem == index,
-                                        onClick = {
-                                            selectedItem = index
-                                        },
-                                        icon = {
-                                            Icon(
-                                                imageVector = if (index == selectedItem) {
-                                                    item.selectedIcon
-                                                } else item.unselectedIcon,
-                                                contentDescription = item.title
-                                            )
-                                        }
-                                    )
-                                }
-                            }
+                            Menu(items = items)
                         }
                     ) {
-                        Box(
-                            modifier = Modifier.padding(all = 16.dp)
-                        ) {
-                            Column {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth()
+                        NavHost(navController = navController, startDestination = Routes.home) {
+                            composable(Routes.home) {
+                                Box(
+                                    modifier = Modifier.padding(all = 16.dp)
                                 ) {
-                                    Button(
-                                        text = "Sair",
-                                        containerColor = MaterialTheme.colorScheme.primary,
-                                        contentColor = Color.Black
-                                    ) {
-                                        presenter.logout()
+                                    Column {
+
                                     }
                                 }
+                            }
+
+                            composable(Routes.settings) {
+                                SettingsScreen()
                             }
                         }
                     }
@@ -103,7 +95,6 @@ class InstructorsHomeActivity : ComponentActivity(), InstructorsHomeContract.Vie
         startActivity(navigation)
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

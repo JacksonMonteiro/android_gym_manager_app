@@ -12,4 +12,6 @@ data class BottomNavigationItem(
     val title: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
+    val action: () -> Unit,
 )
+
