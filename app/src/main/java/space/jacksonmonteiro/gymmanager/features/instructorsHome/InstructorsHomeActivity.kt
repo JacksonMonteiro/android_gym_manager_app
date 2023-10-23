@@ -20,8 +20,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import space.jacksonmonteiro.gymmanager.MainActivity
-import space.jacksonmonteiro.gymmanager.components.BottomNavigationItem
+import space.jacksonmonteiro.gymmanager.components.BlockOnBackPress
 import space.jacksonmonteiro.gymmanager.components.Menu
+import space.jacksonmonteiro.gymmanager.data.models.BottomNavigationItem
 import space.jacksonmonteiro.gymmanager.features.settings.SettingsScreen
 import space.jacksonmonteiro.gymmanager.ui.theme.GymManagerTheme
 import space.jacksonmonteiro.gymmanager.utils.Routes
@@ -70,13 +71,7 @@ class InstructorsHomeActivity : ComponentActivity(), InstructorsHomeContract.Vie
                     ) {
                         NavHost(navController = navController, startDestination = Routes.home) {
                             composable(Routes.home) {
-                                Box(
-                                    modifier = Modifier.padding(all = 16.dp)
-                                ) {
-                                    Column {
-
-                                    }
-                                }
+                                InstructorsHomeScreen()
                             }
 
                             composable(Routes.settings) {
@@ -93,6 +88,19 @@ class InstructorsHomeActivity : ComponentActivity(), InstructorsHomeContract.Vie
         val navigation = Intent(this@InstructorsHomeActivity, MainActivity::class.java)
         navigation.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(navigation)
+    }
+}
+
+@Composable
+fun InstructorsHomeScreen() {
+    BlockOnBackPress()
+
+    Box(
+        modifier = Modifier.padding(all = 16.dp)
+    ) {
+        Column {
+
+        }
     }
 }
 

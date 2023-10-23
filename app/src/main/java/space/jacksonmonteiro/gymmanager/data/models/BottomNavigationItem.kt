@@ -1,4 +1,4 @@
-package space.jacksonmonteiro.gymmanager.components
+package space.jacksonmonteiro.gymmanager.data.models
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

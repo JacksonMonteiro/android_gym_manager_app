@@ -1,19 +1,12 @@
 package space.jacksonmonteiro.gymmanager.components
 
-import android.content.Intent
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import space.jacksonmonteiro.gymmanager.data.models.BottomNavigationItem
 
 
 /*
@@ -30,6 +23,12 @@ fun Menu(items: List<BottomNavigationItem>) {
     NavigationBar() {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
+                label = {
+                    Text(item.title)
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary
+                ),
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
